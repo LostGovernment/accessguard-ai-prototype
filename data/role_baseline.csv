@@ -1,0 +1,72 @@
+role,system,permission,rule_id
+Finance Analyst,Microsoft 365,Standard User,FA-01
+Finance Analyst,Slack,Member,FA-02
+Finance Analyst,SharePoint,Company Intranet Read,FA-03
+Finance Analyst,NetSuite,GL Read,FA-04
+Finance Analyst,NetSuite,Journal Entry Create,FA-05
+Finance Analyst,Workday,Expense Report Review,FA-06
+Finance Analyst,Tableau,Finance Dashboards Viewer,FA-07
+Finance Analyst,SharePoint,Finance Site Edit,FA-08
+Accounts Payable Specialist,Microsoft 365,Standard User,AP-01
+Accounts Payable Specialist,Slack,Member,AP-02
+Accounts Payable Specialist,SharePoint,Company Intranet Read,AP-03
+Accounts Payable Specialist,NetSuite,Vendor Bill Create,AP-04
+Accounts Payable Specialist,NetSuite,GL Read,AP-05
+Accounts Payable Specialist,Bill.com,Payment Prepare,AP-06
+Accounts Payable Specialist,SharePoint,Finance Site Edit,AP-07
+Sales Representative,Microsoft 365,Standard User,SR-01
+Sales Representative,Slack,Member,SR-02
+Sales Representative,SharePoint,Company Intranet Read,SR-03
+Sales Representative,Salesforce,Opportunity Edit,SR-04
+Sales Representative,Salesforce,Account Read,SR-05
+Sales Representative,HubSpot,Contacts Edit,SR-06
+Sales Representative,Gong,Call Recording User,SR-07
+Sales Operations Analyst,Microsoft 365,Standard User,SO-01
+Sales Operations Analyst,Slack,Member,SO-02
+Sales Operations Analyst,SharePoint,Company Intranet Read,SO-03
+Sales Operations Analyst,Salesforce,Report Builder,SO-04
+Sales Operations Analyst,Salesforce,Account Read,SO-05
+Sales Operations Analyst,Tableau,Sales Dashboards Editor,SO-06
+Sales Operations Analyst,HubSpot,Contacts Read,SO-07
+HR Generalist,Microsoft 365,Standard User,HR-01
+HR Generalist,Slack,Member,HR-02
+HR Generalist,SharePoint,Company Intranet Read,HR-03
+HR Generalist,Workday,Employee Record Edit,HR-04
+HR Generalist,Workday,Compensation Read,HR-05
+HR Generalist,Greenhouse,Recruiter,HR-06
+HR Generalist,SharePoint,HR Site Edit,HR-07
+Software Engineer,Microsoft 365,Standard User,SE-01
+Software Engineer,Slack,Member,SE-02
+Software Engineer,SharePoint,Company Intranet Read,SE-03
+Software Engineer,GitHub,Repository Write,SE-04
+Software Engineer,AWS,Dev Account PowerUser,SE-05
+Software Engineer,Jira,Developer,SE-06
+Software Engineer,Datadog,Read Only,SE-07
+Site Reliability Engineer,Microsoft 365,Standard User,RE-01
+Site Reliability Engineer,Slack,Member,RE-02
+Site Reliability Engineer,SharePoint,Company Intranet Read,RE-03
+Site Reliability Engineer,AWS,Prod Account Operator,RE-04
+Site Reliability Engineer,GitHub,Repository Write,RE-05
+Site Reliability Engineer,PagerDuty,Responder,RE-06
+Site Reliability Engineer,Datadog,Admin,RE-07
+Site Reliability Engineer,Jira,Developer,RE-08
+Data Analyst,Microsoft 365,Standard User,DA-01
+Data Analyst,Slack,Member,DA-02
+Data Analyst,SharePoint,Company Intranet Read,DA-03
+Data Analyst,Snowflake,Analytics Reader,DA-04
+Data Analyst,Tableau,Creator,DA-05
+Data Analyst,Jira,Reporter,DA-06
+Data Analyst,GitHub,Repository Read,DA-07
+Customer Support Agent,Microsoft 365,Standard User,CS-01
+Customer Support Agent,Slack,Member,CS-02
+Customer Support Agent,SharePoint,Company Intranet Read,CS-03
+Customer Support Agent,Zendesk,Agent,CS-04
+Customer Support Agent,Salesforce,Account Read,CS-05
+Customer Support Agent,Jira,Reporter,CS-06
+Marketing Specialist,Microsoft 365,Standard User,MK-01
+Marketing Specialist,Slack,Member,MK-02
+Marketing Specialist,SharePoint,Company Intranet Read,MK-03
+Marketing Specialist,HubSpot,Marketing Hub Editor,MK-04
+Marketing Specialist,Canva,Team Member,MK-05
+Marketing Specialist,SharePoint,Marketing Site Edit,MK-06
+Marketing Specialist,Google Analytics,Viewer,MK-07

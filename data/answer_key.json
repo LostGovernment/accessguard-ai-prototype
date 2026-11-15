@@ -1,0 +1,293 @@
+[
+ {
+  "employee_id": "E1048",
+  "employee_name": "Avery Holt",
+  "scenario": "normal",
+  "expected": "clarify",
+  "expected_flags": [
+   "Canva|Team Member",
+   "Google Analytics|Viewer",
+   "HubSpot|Marketing Hub Editor"
+  ],
+  "reason": "missing_permission_value",
+  "note": "One row has a blank permission; flags are held until the reviewer confirms the row."
+ },
+ {
+  "employee_id": "E1061",
+  "employee_name": "Jordan Reyes",
+  "scenario": "clean",
+  "expected": "no_flags",
+  "expected_flags": []
+ },
+ {
+  "employee_id": "E1077",
+  "employee_name": "Priya Nair",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Gong|Call Recording User"
+  ]
+ },
+ {
+  "employee_id": "E1082",
+  "employee_name": "Marcus Okafor",
+  "scenario": "missing_role",
+  "expected": "clarify",
+  "reason": "missing_new_role",
+  "expected_flags_after_answer": [
+   "Salesforce|Account Read",
+   "Tableau|Sales Dashboards Editor"
+  ],
+  "true_new_role": "Software Engineer"
+ },
+ {
+  "employee_id": "E1095",
+  "employee_name": "Lena Lindqvist",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Salesforce|Opportunity Edit"
+  ]
+ },
+ {
+  "employee_id": "E1099",
+  "employee_name": "Tomas Brandt",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Workday|Employee Record Edit"
+  ]
+ },
+ {
+  "employee_id": "E1105",
+  "employee_name": "Keiko Sato",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "GitHub|Repository Write"
+  ]
+ },
+ {
+  "employee_id": "E1122",
+  "employee_name": "Omar Haddad",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "AWS|Prod Account Operator",
+   "GitHub|Repository Write",
+   "Jira|Developer"
+  ]
+ },
+ {
+  "employee_id": "E1139",
+  "employee_name": "Grace Whitfield",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Gong|Call Recording User"
+  ]
+ },
+ {
+  "employee_id": "E1142",
+  "employee_name": "Diego Morales",
+  "scenario": "missing_role",
+  "expected": "clarify",
+  "reason": "missing_new_role",
+  "expected_flags_after_answer": [
+   "HubSpot|Contacts Edit",
+   "Salesforce|Opportunity Edit"
+  ],
+  "true_new_role": "Customer Support Agent"
+ },
+ {
+  "employee_id": "E1145",
+  "employee_name": "Hana Cho",
+  "scenario": "conflict",
+  "expected": "clarify",
+  "reason": "conflicting_new_role",
+  "roles_seen": [
+   "Accounts Payable Specialist",
+   "Software Engineer"
+  ]
+ },
+ {
+  "employee_id": "E1155",
+  "employee_name": "Samuel Adeyemi",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "HubSpot|Contacts Read",
+   "Salesforce|Account Read",
+   "Salesforce|Export All Data",
+   "Salesforce|Report Builder"
+  ]
+ },
+ {
+  "employee_id": "E1159",
+  "employee_name": "Nadia Petrov",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "AWS|Dev Account PowerUser",
+   "Snowflake|ACCOUNTADMIN"
+  ]
+ },
+ {
+  "employee_id": "E1167",
+  "employee_name": "Victor Alvarez",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Datadog|Admin"
+  ]
+ },
+ {
+  "employee_id": "E1171",
+  "employee_name": "Imani Mensah",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Canva|Team Member",
+   "Google Analytics|Viewer"
+  ]
+ },
+ {
+  "employee_id": "E1175",
+  "employee_name": "Felix Koenig",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Canva|Team Member",
+   "SharePoint|Marketing Site Edit"
+  ]
+ },
+ {
+  "employee_id": "E1184",
+  "employee_name": "Rosa Duarte",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "SharePoint|Finance Site Edit"
+  ]
+ },
+ {
+  "employee_id": "E1188",
+  "employee_name": "Kenji Mori",
+  "scenario": "conflict",
+  "expected": "clarify",
+  "reason": "conflicting_new_role",
+  "roles_seen": [
+   "Finance Analyst",
+   "Sales Representative"
+  ]
+ },
+ {
+  "employee_id": "E1203",
+  "employee_name": "Leah Fischer",
+  "scenario": "clean",
+  "expected": "no_flags",
+  "expected_flags": []
+ },
+ {
+  "employee_id": "E1217",
+  "employee_name": "Andre Baptiste",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "AWS|Dev Account PowerUser",
+   "Datadog|Read Only"
+  ]
+ },
+ {
+  "employee_id": "E1223",
+  "employee_name": "Mei Lin",
+  "scenario": "unknown_role",
+  "expected": "clarify",
+  "reason": "no_baseline_for_role",
+  "new_role": "Product Manager"
+ },
+ {
+  "employee_id": "E1236",
+  "employee_name": "Caleb Porter",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "SharePoint|Finance Site Edit",
+   "Tableau|Finance Dashboards Viewer"
+  ]
+ },
+ {
+  "employee_id": "E1250",
+  "employee_name": "Sofia Romano",
+  "scenario": "clean",
+  "expected": "no_flags",
+  "expected_flags": []
+ },
+ {
+  "employee_id": "E1261",
+  "employee_name": "Ravi Iyer",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "HubSpot|Contacts Read",
+   "Tableau|Sales Dashboards Editor"
+  ]
+ },
+ {
+  "employee_id": "E1264",
+  "employee_name": "Elena Vasquez",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Jira|Reporter",
+   "Salesforce|Account Read",
+   "Zendesk|Agent"
+  ]
+ },
+ {
+  "employee_id": "E1273",
+  "employee_name": "Jonah Kline",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "GitHub|Repository Read"
+  ]
+ },
+ {
+  "employee_id": "E1276",
+  "employee_name": "Amara Obi",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Tableau|Creator"
+  ]
+ },
+ {
+  "employee_id": "E1291",
+  "employee_name": "Theo Marsh",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "AWS|Dev Account PowerUser"
+  ]
+ },
+ {
+  "employee_id": "E1308",
+  "employee_name": "Yuki Tanaka",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Tableau|Sales Dashboards Editor"
+  ]
+ },
+ {
+  "employee_id": "E1313",
+  "employee_name": "Isaac Grant",
+  "scenario": "normal",
+  "expected": "flags",
+  "expected_flags": [
+   "Salesforce|Account Read",
+   "Zendesk|Agent"
+  ]
+ }
+]

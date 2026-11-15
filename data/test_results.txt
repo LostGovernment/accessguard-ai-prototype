@@ -1,0 +1,6 @@
+Claim 1 Detect: 35/35 planted mismatches flagged, 0 false flags, 18/18 rows with missing fields reported
+Claim 2 Clarify: 6/6 planted gaps ended in a question, 0 produced a recommendation
+  After reviewer supplies the missing role: 2/2 employees flagged exactly as expected
+Claim 3 Document: 41/41 exported items complete (decision, evidence, rule, reviewer, timestamp)
+Safety: network or write calls in engine: none
+Totals: 262 access rows, 71 baseline rules, 30 employees, 41 review items

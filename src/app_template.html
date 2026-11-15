@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AccessGuard AI: Release One Prototype</title>
+<style>
+  :root { --navy:#14213D; --amber:#FCA311; --gray:#F2F4F7; --line:#D9DEE6; --ink:#1B2430; --muted:#5B6576;
+          --red:#B42318; --redbg:#FEF3F2; --green:#067647; --greenbg:#ECFDF3; --blue:#175CD3; --bluebg:#EFF8FF; --amberbg:#FFF8EB; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Calibri, "Segoe UI", Arial, sans-serif; color:var(--ink); background:#fff; font-size:15px; }
+  h1,h2,h3 { font-family:Cambria, Georgia, serif; color:var(--navy); margin:0; }
+  header { background:var(--navy); color:#fff; padding:14px 28px; display:flex; align-items:center; gap:16px; }
+  header .logo { width:34px; height:34px; border-radius:8px; background:var(--amber); display:grid; place-items:center; font-weight:700; color:var(--navy); font-family:Cambria,serif; }
+  header h1 { color:#fff; font-size:21px; }
+  header .sub { color:#C9D1E0; font-size:13px; }
+  header .tag { margin-left:auto; border:1px solid var(--amber); color:var(--amber); padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+  .banner { background:var(--amberbg); border-bottom:1px solid #F5D9A8; padding:8px 28px; font-size:13px; color:#7A4B00; }
+  main { max-width:1180px; margin:0 auto; padding:22px 28px 60px; }
+  .steps { display:flex; gap:8px; margin-bottom:18px; }
+  .step { flex:1; padding:10px 14px; border-radius:8px; background:var(--gray); color:var(--muted); font-weight:700; font-size:14px; border:2px solid transparent; }
+  .step b { color:var(--navy); font-family:Cambria,serif; margin-right:6px; }
+  .step.on { border-color:var(--amber); background:#fff; color:var(--navy); }
+  .card { background:var(--gray); border-radius:10px; padding:18px 20px; margin-bottom:16px; }
+  .row { display:flex; gap:16px; flex-wrap:wrap; }
+  .drop { flex:1; min-width:260px; background:#fff; border:2px dashed var(--line); border-radius:10px; padding:16px; }
+  .drop h3 { font-size:16px; margin-bottom:4px; }
+  .drop p { margin:0 0 10px; color:var(--muted); font-size:13px; }
+  .drop .fname { font-size:13px; margin-top:8px; color:var(--green); font-weight:700; }
+  button { font-family:inherit; font-size:14px; cursor:pointer; border-radius:7px; border:1px solid var(--line); background:#fff; color:var(--ink); padding:7px 12px; }
+  button.primary { background:var(--navy); color:#fff; border-color:var(--navy); font-weight:700; }
+  button.accent { background:var(--amber); color:var(--navy); border-color:var(--amber); font-weight:700; }
+  button:disabled { opacity:.45; cursor:not-allowed; }
+  .stats { display:flex; gap:12px; flex-wrap:wrap; margin-top:4px; }
+  .stat { background:#fff; border-radius:8px; padding:10px 14px; min-width:130px; }
+  .stat .n { font-family:Cambria,serif; font-size:24px; font-weight:700; color:var(--navy); }
+  .stat .l { font-size:12px; color:var(--muted); }
+  .stat.warn .n { color:#B54708; } .stat.flag .n { color:var(--red); }
+  table { border-collapse:collapse; width:100%; background:#fff; font-size:13px; }
+  th, td { text-align:left; padding:6px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:var(--navy); color:#fff; font-weight:700; }
+  details summary { cursor:pointer; font-weight:700; color:var(--navy); margin-top:10px; }
+  .review { display:grid; grid-template-columns:290px 1fr; gap:16px; align-items:start; }
+  .emplist { background:var(--gray); border-radius:10px; padding:10px; max-height:640px; overflow:auto; position:sticky; top:10px; }
+  .filters { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+  .filters button { padding:4px 9px; font-size:12px; }
+  .filters button.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .emp { display:flex; justify-content:space-between; align-items:center; gap:6px; padding:8px 10px; border-radius:7px; cursor:pointer; background:#fff; margin-bottom:5px; border:2px solid transparent; }
+  .emp.sel { border-color:var(--amber); }
+  .emp .nm { font-weight:700; font-size:14px; } .emp .rl { font-size:11.5px; color:var(--muted); }
+  .pill { font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+  .p-flag { background:var(--redbg); color:var(--red); } .p-q { background:var(--amberbg); color:#B54708; }
+  .p-ok { background:var(--greenbg); color:var(--green); } .p-done { background:var(--bluebg); color:var(--blue); }
+  .item { background:#fff; border:1px solid var(--line); border-left:5px solid var(--red); border-radius:9px; padding:14px 16px; margin-bottom:12px; }
+  .item.q { border-left-color:var(--amber); }
+  .item .head { display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+  .item .perm { font-family:Cambria,serif; font-size:17px; font-weight:700; color:var(--navy); }
+  .item .meta { font-size:12.5px; color:var(--muted); margin:4px 0 8px; }
+  .item .expl { background:var(--gray); border-radius:7px; padding:9px 11px; font-size:13.5px; line-height:1.45; }
+  .item .expl .lbl { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:3px; }
+  .decide { display:flex; gap:7px; margin-top:10px; flex-wrap:wrap; align-items:center; }
+  .decide button.sel-keep { background:var(--greenbg); border-color:var(--green); color:var(--green); font-weight:700; }
+  .decide button.sel-investigate { background:var(--bluebg); border-color:var(--blue); color:var(--blue); font-weight:700; }
+  .decide button.sel-revoke-recommended { background:var(--redbg); border-color:var(--red); color:var(--red); font-weight:700; }
+  .decide .when { font-size:12px; color:var(--muted); margin-left:auto; }
+  .decide input, .decide select { font-family:inherit; font-size:13px; padding:6px 8px; border:1px solid var(--line); border-radius:6px; }
+  .emphead { background:var(--navy); color:#fff; border-radius:10px; padding:12px 16px; margin-bottom:12px; }
+  .emphead h2 { color:#fff; font-size:20px; } .emphead .r { color:#C9D1E0; font-size:13px; margin-top:3px; }
+  .emphead .arrow { color:var(--amber); font-weight:700; }
+  .exportbar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .exportbar input { font-family:inherit; font-size:14px; padding:7px 10px; border:1px solid var(--line); border-radius:7px; min-width:220px; }
+  .progress { flex:1; min-width:200px; height:10px; background:#fff; border-radius:999px; overflow:hidden; }
+  .progress > div { height:100%; background:var(--amber); width:0; transition:width .2s; }
+  .muted { color:var(--muted); font-size:13px; }
+  .noaccess { font-size:12px; color:var(--green); font-weight:700; }
+  .hidden { display:none; }
+  .ok { color:var(--green); font-weight:700; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">AG</div>
+  <div><h1>AccessGuard AI</h1><div class="sub">Role-change access review &middot; Release One prototype</div></div>
+  <span class="tag">READ-ONLY: CANNOT CHANGE ACCESS</span>
+</header>
+<div class="banner"><b>Prototype for MSIS 524 Team 1.</b> Uses synthetic data only. Flags come from the rules engine. Explanations are template text built from the same rows and rules, standing in for the foundation-model step. Nothing leaves this browser page.</div>
+<main>
+  <div class="steps">
+    <div class="step on" id="st1"><b>1</b>Upload and check files</div>
+    <div class="step" id="st2"><b>2</b>Detect and clarify</div>
+    <div class="step" id="st3"><b>3</b>Decide and document</div>
+  </div>
+
+  <section class="card" id="upload">
+    <h2 style="font-size:19px;margin-bottom:10px">Upload the two CSV exports</h2>
+    <div class="row">
+      <div class="drop"><h3>Access export</h3><p>One row per permission: employee_id, employee_name, previous_role, new_role, change_date, system, permission</p>
+        <input type="file" id="fA" accept=".csv"><div class="fname" id="nA"></div></div>
+      <div class="drop"><h3>Role-permission baseline</h3><p>What each role should have: role, system, permission, rule_id</p>
+        <input type="file" id="fB" accept=".csv"><div class="fname" id="nB"></div></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center">
+      <button class="primary" id="run" disabled>Start review</button>
+      <button class="accent" id="sample">Load synthetic test set</button>
+      <button id="dlA">Download sample access CSV</button>
+      <button id="dlB">Download sample baseline CSV</button>
+    </div>
+    <div id="intake" class="hidden" style="margin-top:16px"></div>
+  </section>
+
+  <section id="reviewSec" class="hidden">
+    <div class="card" style="padding:14px 18px">
+      <div class="exportbar">
+        <b style="font-family:Cambria,serif;color:var(--navy);font-size:16px">Review progress</b>
+        <div class="progress"><div id="bar"></div></div>
+        <span id="ptext" class="muted"></span>
+        <input id="reviewer" placeholder="Reviewer name (required to export)">
+        <button class="primary" id="export" disabled>Export audit record</button>
+      </div>
+      <div id="exportNote" class="muted" style="margin-top:6px"></div>
+    </div>
+    <div class="review">
+      <div class="emplist">
+        <div class="filters" id="filters">
+          <button data-f="all" class="on">All</button><button data-f="flag">Flagged</button><button data-f="q">Needs answer</button><button data-f="open">Undecided</button><button data-f="clean">No flags</button>
+        </div>
+        <div id="emps"></div>
+      </div>
+      <div id="detail"></div>
+    </div>
+  </section>
+  <section class="card hidden" id="filePanel">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><b style="font-family:Cambria,serif;color:var(--navy)">File contents: <span id="fileName"></span></b>
+      <button id="copyFile">Copy</button><button id="closeFile">Close</button><span class="muted">If the download did not start, copy this text into a .csv file.</span></div>
+    <textarea id="fileText" readonly style="width:100%;height:180px;font-family:Consolas,monospace;font-size:12px"></textarea>
+  </section>
+</main>
+<script>
+/*ENGINE*/
+const SAMPLE_ACCESS = /*SAMPLE_A*/;
+const SAMPLE_BASE = /*SAMPLE_B*/;
+const $ = id => document.getElementById(id);
+let texts = { A: null, B: null }, result = null, items = [], decisions = {}, notes = {}, selected = null, filter = "all";
+
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function download(name, text) {
+  try { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" })); a.download = name; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
+  // Fallback for viewers that block downloads: show the file with a Copy button
+  $("fileName").textContent = name; $("fileText").value = text; $("filePanel").classList.remove("hidden");
+}
+function readFile(input, slot, label) {
+  input.onchange = () => { const f = input.files[0]; if (!f) return; const r = new FileReader();
+    r.onload = () => { texts[slot] = r.result; $(label).textContent = `Loaded ${f.name}`; $("run").disabled = !(texts.A && texts.B); }; r.readAsText(f); };
+}
+readFile($("fA"), "A", "nA"); readFile($("fB"), "B", "nB");
+$("dlA").onclick = () => download("access_export.csv", SAMPLE_ACCESS);
+$("dlB").onclick = () => download("role_baseline.csv", SAMPLE_BASE);
+$("sample").onclick = () => { texts = { A: SAMPLE_ACCESS, B: SAMPLE_BASE }; $("nA").textContent = "Loaded synthetic access_export.csv"; $("nB").textContent = "Loaded synthetic role_baseline.csv"; $("run").disabled = false; start(); };
+$("run").onclick = start;
+
+function start() {
+  result = analyze(texts.A, texts.B); items = result.items.slice(); decisions = {}; notes = {};
+  const i = result.intake, mv = i.missingValues;
+  const byField = {}; mv.forEach(m => { byField[m.field] = (byField[m.field] || 0) + 1; });
+  const flags = items.filter(x => x.type === "flag").length, qs = items.filter(x => x.type === "clarification").length;
+  let h = `<div class="stats">
+    <div class="stat"><div class="n">${i.accessRows}</div><div class="l">access rows imported</div></div>
+    <div class="stat"><div class="n">${i.baselineRows}</div><div class="l">baseline rules (${i.roles} roles)</div></div>
+    <div class="stat"><div class="n">${i.employees}</div><div class="l">employees with a role change</div></div>
+    <div class="stat ${mv.length ? "warn" : ""}"><div class="n">${mv.length}</div><div class="l">rows with missing fields</div></div>
+    <div class="stat flag"><div class="n">${flags}</div><div class="l">permissions outside new role</div></div>
+    <div class="stat warn"><div class="n">${qs}</div><div class="l">employees needing an answer</div></div></div>`;
+  if (i.missingColumns.length) h += `<p style="color:var(--red);font-weight:700">Missing required columns: ${esc(i.missingColumns.join(", "))}. Fix the export and upload again.</p>`;
+  if (mv.length) h += `<details><summary>Missing-field report: ${Object.entries(byField).map(([f, n]) => `${n} blank ${f}`).join(", ")}</summary>
+    <table style="margin-top:8px"><tr><th>File</th><th>Row</th><th>Field</th><th>Employee</th></tr>${mv.map(m => `<tr><td>${esc(m.file)}</td><td>${m.line}</td><td>${esc(m.field)}</td><td>${esc(m.employee_id)}</td></tr>`).join("")}</table></details>`;
+  else h += `<p class="ok">All required fields present.</p>`;
+  $("intake").innerHTML = h; $("intake").classList.remove("hidden");
+  if (!i.ok) return;
+  $("reviewSec").classList.remove("hidden"); $("st2").classList.add("on");
+  selected = (result.employees.find(e => items.some(x => x.employee.employee_id === e.employee_id && x.type === "flag")) || result.employees[0]).employee_id;
+  render();
+}
+
+function empItems(id) { return items.filter(x => x.employee.employee_id === id); }
+function status(id) {
+  const its = empItems(id);
+  if (!its.length) return { cls: "p-ok", txt: "No flags", key: "clean" };
+  if (its.some(x => x.type === "clarification" && !decisions[x.id])) return { cls: "p-q", txt: "Needs answer", key: "q" };
+  const open = its.filter(x => !decisions[x.id]).length;
+  if (!open) return { cls: "p-done", txt: "Decided", key: "done" };
+  return { cls: "p-flag", txt: `${its.filter(x => x.type === "flag").length} flagged`, key: "flag" };
+}
+function render() {
+  const emps = result.employees.filter(e => {
+    const s = status(e.employee_id), its = empItems(e.employee_id);
+    if (filter === "all") return true;
+    if (filter === "flag") return its.some(x => x.type === "flag");
+    if (filter === "q") return its.some(x => x.type === "clarification");
+    if (filter === "open") return its.some(x => !decisions[x.id]);
+    if (filter === "clean") return !its.length;
+  });
+  $("emps").innerHTML = emps.map(e => { const s = status(e.employee_id);
+    return `<div class="emp ${e.employee_id === selected ? "sel" : ""}" data-id="${e.employee_id}"><div><div class="nm">${esc(e.employee_name)}</div><div class="rl">${esc(e.employee_id)} &middot; ${esc(e.roles_seen.length > 1 ? "role unclear" : (e.new_role || "role unknown"))}</div></div><span class="pill ${s.cls}">${s.txt}</span></div>`; }).join("") || `<p class="muted">No employees match this filter.</p>`;
+  document.querySelectorAll(".emp").forEach(el => el.onclick = () => { selected = el.dataset.id; render(); });
+  renderDetail(); renderProgress();
+}
+function renderDetail() {
+  const e = result.employees.find(x => x.employee_id === selected); const its = empItems(selected);
+  const cur = its[0] ? its[0].employee : e;
+  let h = `<div class="emphead"><h2>${esc(e.employee_name)} <span style="font-size:14px;color:#C9D1E0">${esc(e.employee_id)}</span></h2>
+    <div class="r">${esc(e.previous_role || "?")} <span class="arrow">&rarr;</span> ${esc(cur.new_role || (e.roles_seen.length > 1 ? e.roles_seen.join(" / ") : "new role missing"))} &middot; changed ${esc(e.change_date || "?")} &middot; ${e.rowCount} permission rows</div></div>`;
+  if (!its.length) h += `<div class="item" style="border-left-color:var(--green)"><div class="perm">Every permission matches the ${esc(cur.new_role)} baseline</div><div class="meta">Nothing to review for this employee.</div></div>`;
+  for (const it of its) {
+    const d = decisions[it.id];
+    if (it.type === "clarification") {
+      const canAnswer = it.reason === "missing_new_role" || it.reason === "conflicting_new_role" || it.reason === "no_baseline_for_role";
+      h += `<div class="item q"><div class="head"><span class="perm">Question for the reviewer</span><span class="pill p-q">No recommendation made</span></div>
+        <div class="meta">${esc(it.evidence)} &middot; ${esc(it.rule)}</div>
+        <div class="expl"><span class="lbl">Why the agent stopped</span>${esc(it.explanation)}</div>
+        <div class="decide">${canAnswer ? `<select id="ans-${it.id}"><option value="">Choose the correct role...</option>${it.options.map(o => `<option>${esc(o)}</option>`).join("")}</select><button class="primary" data-ans="${it.id}">Answer and re-check</button>`
+          : `<button class="primary" data-ign="${it.id}">Confirm blank row can be ignored, re-check</button>`}
+          <button class="${d ? "sel-investigate" : ""}" data-dec="${it.id}" data-v="investigate">Hold as investigate</button>
+          <span class="when">${d ? `Decided ${new Date(d.at).toLocaleString()}` : ""}</span></div></div>`;
+    } else {
+      h += `<div class="item"><div class="head"><span class="perm">${esc(it.system)}: ${esc(it.permission)}</span><span class="pill p-flag">${it.origin === "previous role" ? "Left over from previous role" : "In no baseline"}</span></div>
+        <div class="meta">Evidence: ${esc(it.evidence)}</div>
+        <div class="expl"><span class="lbl">Explanation (template stand-in for AI step)</span>${esc(it.explanation)}</div>
+        <div class="decide">${["keep", "investigate", "revoke-recommended"].map(v => `<button class="${d && d.decision === v ? "sel-" + v : ""}" data-dec="${it.id}" data-v="${v}">${v === "revoke-recommended" ? "Revoke-recommended" : v[0].toUpperCase() + v.slice(1)}</button>`).join("")}
+          <input placeholder="Note (optional)" data-note="${it.id}" value="${esc(notes[it.id] || "")}" style="flex:1;min-width:140px">
+          <span class="when">${d ? `Decided ${new Date(d.at).toLocaleString()}` : ""}</span></div></div>`;
+    }
+  }
+  h += `<p class="noaccess">AccessGuard AI records decisions only. Any access change goes through your normal approval process.</p>`;
+  $("detail").innerHTML = h;
+  document.querySelectorAll("[data-dec]").forEach(b => b.onclick = () => { const id = b.dataset.dec; const prev = decisions[id] || {};
+    decisions[id] = { decision: b.dataset.v, note: notes[id] || prev.note || "", at: new Date().toISOString() }; render(); });
+  document.querySelectorAll("[data-note]").forEach(inp => inp.onchange = () => { notes[inp.dataset.note] = inp.value; if (decisions[inp.dataset.note]) decisions[inp.dataset.note].note = inp.value; });
+  document.querySelectorAll("[data-ans]").forEach(b => b.onclick = () => { const v = $("ans-" + b.dataset.ans).value; if (!v) return; replace(b.dataset.ans, { new_role: v }); });
+  document.querySelectorAll("[data-ign]").forEach(b => b.onclick = () => replace(b.dataset.ign, { ignoreBlankRows: true }));
+}
+function replace(itemId, answer) {
+  const it = items.find(x => x.id === itemId); const eid = it.employee.employee_id;
+  const fresh = resolve(result, eid, answer);
+  const idx = items.findIndex(x => x.employee.employee_id === eid);
+  items = items.filter(x => x.employee.employee_id !== eid); items.splice(idx, 0, ...fresh);
+  delete decisions[itemId]; render();
+}
+function renderProgress() {
+  const total = items.length, done = items.filter(x => decisions[x.id]).length;
+  $("bar").style.width = total ? `${100 * done / total}%` : "100%";
+  $("ptext").textContent = `${done} of ${total} items decided`;
+  const ok = done === total && $("reviewer").value.trim();
+  $("export").disabled = !ok;
+  $("exportNote").textContent = done < total ? "Export unlocks when every flag and question has a decision, so the audit record is never partial." : (!$("reviewer").value.trim() ? "Enter the reviewer name to export." : "Ready to export.");
+  if (done === total && total) $("st3").classList.add("on");
+}
+$("reviewer").oninput = renderProgress;
+$("copyFile").onclick = () => { navigator.clipboard.writeText($("fileText").value).then(() => $("copyFile").textContent = "Copied", () => { $("fileText").select(); }); };
+$("closeFile").onclick = () => $("filePanel").classList.add("hidden");
+$("filters").onclick = ev => { const f = ev.target.dataset.f; if (!f) return; filter = f; document.querySelectorAll("#filters button").forEach(b => b.classList.toggle("on", b.dataset.f === f)); render(); };
+$("export").onclick = () => {
+  const csv = toCSV(exportRows(items, decisions, $("reviewer").value.trim()));
+  download(`accessguard_audit_${new Date().toISOString().slice(0, 10)}.csv`, csv);
+  $("exportNote").innerHTML = `<span class="ok">Exported ${items.length} decisions with evidence, reviewer and timestamp. No access was changed.</span>`;
+};
+</script>
+</body>
+</html>

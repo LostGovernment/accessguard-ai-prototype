@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AccessGuard AI: Release One Prototype</title>
+<style>
+  :root { --navy:#14213D; --amber:#FCA311; --gray:#F2F4F7; --line:#D9DEE6; --ink:#1B2430; --muted:#5B6576;
+          --red:#B42318; --redbg:#FEF3F2; --green:#067647; --greenbg:#ECFDF3; --blue:#175CD3; --bluebg:#EFF8FF; --amberbg:#FFF8EB; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Calibri, "Segoe UI", Arial, sans-serif; color:var(--ink); background:#fff; font-size:15px; }
+  h1,h2,h3 { font-family:Cambria, Georgia, serif; color:var(--navy); margin:0; }
+  header { background:var(--navy); color:#fff; padding:14px 28px; display:flex; align-items:center; gap:16px; }
+  header .logo { width:34px; height:34px; border-radius:8px; background:var(--amber); display:grid; place-items:center; font-weight:700; color:var(--navy); font-family:Cambria,serif; }
+  header h1 { color:#fff; font-size:21px; }
+  header .sub { color:#C9D1E0; font-size:13px; }
+  header .tag { margin-left:auto; border:1px solid var(--amber); color:var(--amber); padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+  .banner { background:var(--amberbg); border-bottom:1px solid #F5D9A8; padding:8px 28px; font-size:13px; color:#7A4B00; }
+  main { max-width:1180px; margin:0 auto; padding:22px 28px 60px; }
+  .steps { display:flex; gap:8px; margin-bottom:18px; }
+  .step { flex:1; padding:10px 14px; border-radius:8px; background:var(--gray); color:var(--muted); font-weight:700; font-size:14px; border:2px solid transparent; }
+  .step b { color:var(--navy); font-family:Cambria,serif; margin-right:6px; }
+  .step.on { border-color:var(--amber); background:#fff; color:var(--navy); }
+  .card { background:var(--gray); border-radius:10px; padding:18px 20px; margin-bottom:16px; }
+  .row { display:flex; gap:16px; flex-wrap:wrap; }
+  .drop { flex:1; min-width:260px; background:#fff; border:2px dashed var(--line); border-radius:10px; padding:16px; }
+  .drop h3 { font-size:16px; margin-bottom:4px; }
+  .drop p { margin:0 0 10px; color:var(--muted); font-size:13px; }
+  .drop .fname { font-size:13px; margin-top:8px; color:var(--green); font-weight:700; }
+  button { font-family:inherit; font-size:14px; cursor:pointer; border-radius:7px; border:1px solid var(--line); background:#fff; color:var(--ink); padding:7px 12px; }
+  button.primary { background:var(--navy); color:#fff; border-color:var(--navy); font-weight:700; }
+  button.accent { background:var(--amber); color:var(--navy); border-color:var(--amber); font-weight:700; }
+  button:disabled { opacity:.45; cursor:not-allowed; }
+  .stats { display:flex; gap:12px; flex-wrap:wrap; margin-top:4px; }
+  .stat { background:#fff; border-radius:8px; padding:10px 14px; min-width:130px; }
+  .stat .n { font-family:Cambria,serif; font-size:24px; font-weight:700; color:var(--navy); }
+  .stat .l { font-size:12px; color:var(--muted); }
+  .stat.warn .n { color:#B54708; } .stat.flag .n { color:var(--red); }
+  table { border-collapse:collapse; width:100%; background:#fff; font-size:13px; }
+  th, td { text-align:left; padding:6px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:var(--navy); color:#fff; font-weight:700; }
+  details summary { cursor:pointer; font-weight:700; color:var(--navy); margin-top:10px; }
+  .review { display:grid; grid-template-columns:290px 1fr; gap:16px; align-items:start; }
+  .emplist { background:var(--gray); border-radius:10px; padding:10px; max-height:640px; overflow:auto; position:sticky; top:10px; }
+  .filters { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+  .filters button { padding:4px 9px; font-size:12px; }
+  .filters button.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .emp { display:flex; justify-content:space-between; align-items:center; gap:6px; padding:8px 10px; border-radius:7px; cursor:pointer; background:#fff; margin-bottom:5px; border:2px solid transparent; }
+  .emp.sel { border-color:var(--amber); }
+  .emp .nm { font-weight:700; font-size:14px; } .emp .rl { font-size:11.5px; color:var(--muted); }
+  .pill { font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+  .p-flag { background:var(--redbg); color:var(--red); } .p-q { background:var(--amberbg); color:#B54708; }
+  .p-ok { background:var(--greenbg); color:var(--green); } .p-done { background:var(--bluebg); color:var(--blue); }
+  .item { background:#fff; border:1px solid var(--line); border-left:5px solid var(--red); border-radius:9px; padding:14px 16px; margin-bottom:12px; }
+  .item.q { border-left-color:var(--amber); }
+  .item .head { display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+  .item .perm { font-family:Cambria,serif; font-size:17px; font-weight:700; color:var(--navy); }
+  .item .meta { font-size:12.5px; color:var(--muted); margin:4px 0 8px; }
+  .item .expl { background:var(--gray); border-radius:7px; padding:9px 11px; font-size:13.5px; line-height:1.45; }
+  .item .expl .lbl { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:3px; }
+  .decide { display:flex; gap:7px; margin-top:10px; flex-wrap:wrap; align-items:center; }
+  .decide button.sel-keep { background:var(--greenbg); border-color:var(--green); color:var(--green); font-weight:700; }
+  .decide button.sel-investigate { background:var(--bluebg); border-color:var(--blue); color:var(--blue); font-weight:700; }
+  .decide button.sel-revoke-recommended { background:var(--redbg); border-color:var(--red); color:var(--red); font-weight:700; }
+  .decide .when { font-size:12px; color:var(--muted); margin-left:auto; }
+  .decide input, .decide select { font-family:inherit; font-size:13px; padding:6px 8px; border:1px solid var(--line); border-radius:6px; }
+  .emphead { background:var(--navy); color:#fff; border-radius:10px; padding:12px 16px; margin-bottom:12px; }
+  .emphead h2 { color:#fff; font-size:20px; } .emphead .r { color:#C9D1E0; font-size:13px; margin-top:3px; }
+  .emphead .arrow { color:var(--amber); font-weight:700; }
+  .exportbar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .exportbar input { font-family:inherit; font-size:14px; padding:7px 10px; border:1px solid var(--line); border-radius:7px; min-width:220px; }
+  .progress { flex:1; min-width:200px; height:10px; background:#fff; border-radius:999px; overflow:hidden; }
+  .progress > div { height:100%; background:var(--amber); width:0; transition:width .2s; }
+  .muted { color:var(--muted); font-size:13px; }
+  .noaccess { font-size:12px; color:var(--green); font-weight:700; }
+  .hidden { display:none; }
+  .ok { color:var(--green); font-weight:700; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">AG</div>
+  <div><h1>AccessGuard AI</h1><div class="sub">Role-change access review &middot; Release One prototype</div></div>
+  <span class="tag">READ-ONLY: CANNOT CHANGE ACCESS</span>
+</header>
+<div class="banner"><b>Prototype for MSIS 524 Team 1.</b> Uses synthetic data only. Flags come from the rules engine. Explanations are template text built from the same rows and rules, standing in for the foundation-model step. Nothing leaves this browser page.</div>
+<main>
+  <div class="steps">
+    <div class="step on" id="st1"><b>1</b>Upload and check files</div>
+    <div class="step" id="st2"><b>2</b>Detect and clarify</div>
+    <div class="step" id="st3"><b>3</b>Decide and document</div>
+  </div>
+
+  <section class="card" id="upload">
+    <h2 style="font-size:19px;margin-bottom:10px">Upload the two CSV exports</h2>
+    <div class="row">
+      <div class="drop"><h3>Access export</h3><p>One row per permission: employee_id, employee_name, previous_role, new_role, change_date, system, permission</p>
+        <input type="file" id="fA" accept=".csv"><div class="fname" id="nA"></div></div>
+      <div class="drop"><h3>Role-permission baseline</h3><p>What each role should have: role, system, permission, rule_id</p>
+        <input type="file" id="fB" accept=".csv"><div class="fname" id="nB"></div></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center">
+      <button class="primary" id="run" disabled>Start review</button>
+      <button class="accent" id="sample">Load synthetic test set</button>
+      <button id="dlA">Download sample access CSV</button>
+      <button id="dlB">Download sample baseline CSV</button>
+    </div>
+    <div id="intake" class="hidden" style="margin-top:16px"></div>
+  </section>
+
+  <section id="reviewSec" class="hidden">
+    <div class="card" style="padding:14px 18px">
+      <div class="exportbar">
+        <b style="font-family:Cambria,serif;color:var(--navy);font-size:16px">Review progress</b>
+        <div class="progress"><div id="bar"></div></div>
+        <span id="ptext" class="muted"></span>
+        <input id="reviewer" placeholder="Reviewer name (required to export)">
+        <button class="primary" id="export" disabled>Export audit record</button>
+      </div>
+      <div id="exportNote" class="muted" style="margin-top:6px"></div>
+    </div>
+    <div class="review">
+      <div class="emplist">
+        <div class="filters" id="filters">
+          <button data-f="all" class="on">All</button><button data-f="flag">Flagged</button><button data-f="q">Needs answer</button><button data-f="open">Undecided</button><button data-f="clean">No flags</button>
+        </div>
+        <div id="emps"></div>
+      </div>
+      <div id="detail"></div>
+    </div>
+  </section>
+  <section class="card hidden" id="filePanel">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><b style="font-family:Cambria,serif;color:var(--navy)">File contents: <span id="fileName"></span></b>
+      <button id="copyFile">Copy</button><button id="closeFile">Close</button><span class="muted">If the download did not start, copy this text into a .csv file.</span></div>
+    <textarea id="fileText" readonly style="width:100%;height:180px;font-family:Consolas,monospace;font-size:12px"></textarea>
+  </section>
+</main>
+<script>
+// AccessGuard AI prototype engine. Pure functions, no network, no write path to any IAM system.
+// Rules decide what is flagged. Explanations are template text built from the same rows and rules,
+// standing in for the foundation-model step described in the deck.
+
+const ACCESS_FIELDS = ["employee_id", "employee_name", "previous_role", "new_role", "change_date", "system", "permission"];
+const BASELINE_FIELDS = ["role", "system", "permission", "rule_id"];
+
+function parseCSV(text) {
+  const rows = []; let row = []; let field = ""; let q = false;
+  text = text.replace(/^﻿/, "");
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) {
+      if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else q = false; }
+      else field += c;
+    } else if (c === '"') q = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field); field = ""; rows.push(row); row = [];
+    } else field += c;
+  }
+  if (field !== "" || row.length) { row.push(field); rows.push(row); }
+  const nonEmpty = rows.filter(r => r.some(v => v.trim() !== ""));
+  if (!nonEmpty.length) return { headers: [], records: [] };
+  const headers = nonEmpty[0].map(h => h.trim().toLowerCase());
+  const records = [];
+  // line numbers: keep the original file line so evidence points at the real row
+  let line = 0;
+  for (const r of rows) {
+    line++;
+    if (r === nonEmpty[0] || !r.some(v => v.trim() !== "")) continue;
+    const o = { _line: line };
+    headers.forEach((h, j) => { o[h] = (r[j] || "").trim(); });
+    records.push(o);
+  }
+  return { headers, records };
+}
+
+function checkFields(parsed, required, fileLabel) {
+  const missingColumns = required.filter(f => !parsed.headers.includes(f));
+  const missingValues = [];
+  for (const r of parsed.records)
+    for (const f of required)
+      if (parsed.headers.includes(f) && !r[f]) missingValues.push({ file: fileLabel, line: r._line, field: f, employee_id: r.employee_id || "" });
+  return { missingColumns, missingValues };
+}
+
+const key = (s, p) => `${s}|${p}`.toLowerCase();
+
+function buildBaseline(records) {
+  const byRole = new Map();
+  for (const r of records) {
+    if (!r.role || !r.system || !r.permission) continue;
+    if (!byRole.has(r.role)) byRole.set(r.role, new Map());
+    byRole.get(r.role).set(key(r.system, r.permission), r);
+  }
+  return byRole;
+}
+
+function rulesFor(baseline, role, system) {
+  const m = baseline.get(role); if (!m) return [];
+  return [...m.values()].filter(r => r.system.toLowerCase() === system.toLowerCase());
+}
+
+function ruleRange(baseline, role) {
+  const ids = [...(baseline.get(role) || new Map()).values()].map(r => r.rule_id).sort();
+  return ids.length ? `${ids[0]} to ${ids[ids.length - 1]}` : "none";
+}
+
+function explainFlag(emp, row, baseline) {
+  const name = emp.employee_name || emp.employee_id;
+  const sameSystem = rulesFor(baseline, emp.new_role, row.system);
+  const prevRule = (baseline.get(emp.previous_role) || new Map()).get(key(row.system, row.permission));
+  let s = `${name} moved from ${emp.previous_role || "an unrecorded role"} to ${emp.new_role} on ${emp.change_date || "an unrecorded date"}. `;
+  s += `Row ${row._line} of the access export shows ${row.system} "${row.permission}". `;
+  if (sameSystem.length)
+    s += `The ${emp.new_role} baseline grants ${row.system} access only as ${sameSystem.map(r => `"${r.permission}" (${r.rule_id})`).join(", ")}, so this permission is outside the new role. `;
+  else
+    s += `The ${emp.new_role} baseline (rules ${ruleRange(baseline, emp.new_role)}) grants no ${row.system} access at all. `;
+  if (prevRule)
+    s += `It matches rule ${prevRule.rule_id} for the previous role, which suggests it was left over from before the move. Confirm with the ${row.system} owner before recommending revocation.`;
+  else
+    s += `It is not in the baseline for the previous role either, so it may have been granted as a one-off exception. Look for an approval record before deciding.`;
+  return s;
+}
+
+function analyze(accessText, baselineText) {
+  const A = parseCSV(accessText), B = parseCSV(baselineText);
+  const accessCheck = checkFields(A, ACCESS_FIELDS, "access export");
+  // employee_name and previous_role are helpful context but not required to run the comparison
+  const blocking = ["employee_id", "new_role", "system", "permission"];
+  const bCheck = checkFields(B, BASELINE_FIELDS, "role baseline");
+  const intake = {
+    accessRows: A.records.length, baselineRows: B.records.length,
+    missingColumns: [...accessCheck.missingColumns.map(c => `access export: ${c}`), ...bCheck.missingColumns.map(c => `role baseline: ${c}`)],
+    missingValues: [...accessCheck.missingValues, ...bCheck.missingValues],
+    ok: false, employees: 0, roles: 0
+  };
+  const fatal = ["employee_id", "new_role", "system", "permission"].filter(c => !A.headers.includes(c)).length || bCheck.missingColumns.length;
+  if (fatal) return { intake, items: [], employees: [] };
+  const baseline = buildBaseline(B.records);
+  intake.roles = baseline.size; intake.ok = true;
+
+  const groups = new Map();
+  for (const r of A.records) {
+    if (!r.employee_id) continue; // reported as a missing value; cannot be attributed
+    if (!groups.has(r.employee_id)) groups.set(r.employee_id, []);
+    groups.get(r.employee_id).push(r);
+  }
+  intake.employees = groups.size;
+  const employees = [], items = [];
+  for (const [eid, rows] of groups) {
+    const emp = summarize(eid, rows);
+    employees.push(emp);
+    items.push(...evaluate(emp, rows, baseline, null));
+  }
+  return { intake, items, employees, _baseline: baseline, _groups: groups };
+}
+
+function summarize(eid, rows) {
+  const pick = f => { const v = rows.map(r => r[f]).filter(Boolean); return v[0] || ""; };
+  return { employee_id: eid, employee_name: pick("employee_name"), previous_role: pick("previous_role"),
+           new_role: pick("new_role"), change_date: pick("change_date"), rowCount: rows.length,
+           roles_seen: [...new Set(rows.map(r => r.new_role).filter(Boolean))] };
+}
+
+// answer: { new_role?: string, ignoreBlankRows?: bool } supplied by the reviewer for a clarification
+function evaluate(emp, rows, baseline, answer) {
+  const issues = [];
+  const blankRole = rows.filter(r => !r.new_role);
+  const blankPerm = rows.filter(r => !r.system || !r.permission);
+  let role = emp.roles_seen.length === 1 ? emp.roles_seen[0] : "";
+  if (answer && answer.new_role) role = answer.new_role;
+  else {
+    if (emp.roles_seen.length > 1)
+      issues.push({ reason: "conflicting_new_role", lines: rows.filter(r => r.new_role).map(r => r._line),
+        question: `The export lists more than one new role for ${emp.employee_name || emp.employee_id}: ${emp.roles_seen.join(" and ")}. Which role is correct?`,
+        options: emp.roles_seen });
+    else if (blankRole.length)
+      issues.push({ reason: "missing_new_role", lines: blankRole.map(r => r._line),
+        question: `${blankRole.length === rows.length ? "No row" : `${blankRole.length} of ${rows.length} rows`} for ${emp.employee_name || emp.employee_id} ${blankRole.length === rows.length ? "records" : "are missing"} a new role. What role did this employee move into?`,
+        options: [...baseline.keys()] });
+  }
+  if (role && !baseline.has(role))
+    issues.push({ reason: "no_baseline_for_role", lines: rows.map(r => r._line),
+      question: `There is no role-permission baseline for "${role}". Add a baseline for this role, or confirm which existing role it should be compared with.`,
+      options: [...baseline.keys()] });
+  if (blankPerm.length && !(answer && answer.ignoreBlankRows))
+    issues.push({ reason: "missing_permission_value", lines: blankPerm.map(r => r._line),
+      question: `Row ${blankPerm.map(r => r._line).join(", ")} for ${emp.employee_name || emp.employee_id} has a blank system or permission. Confirm whether the row can be ignored, or correct the export and upload it again.`,
+      options: ["ignore"] });
+
+  const effective = { ...emp, new_role: role };
+  if (issues.length) {
+    const it = issues[0];
+    return [{ id: `${emp.employee_id}-Q`, type: "clarification", employee: effective, reason: it.reason, allReasons: issues.map(i => i.reason),
+      question: it.question, options: it.options, evidence: `Access export ${new Set(it.lines).size === 1 ? "row" : "rows"} ${compact(it.lines)}`,
+      rule: { no_baseline_for_role: "No baseline rule available", conflicting_new_role: "Role must be unambiguous before comparison",
+              missing_new_role: "Role must be known before comparison", missing_permission_value: "Every row needs a system and permission" }[it.reason],
+      explanation: `${it.question} No recommendation is made for this employee until the reviewer answers, because comparing against a guessed role or an incomplete row could flag the wrong access or miss real leftovers.`,
+      recommendation: "none (clarification requested)" }];
+  }
+  const allowed = baseline.get(role);
+  const out = [], seen = new Set();
+  for (const r of rows) {
+    if (!r.system || !r.permission) continue;
+    const k = key(r.system, r.permission);
+    if (allowed.has(k) || seen.has(k)) continue;
+    seen.add(k);
+    const prevRule = (baseline.get(emp.previous_role) || new Map()).get(k);
+    out.push({ id: `${emp.employee_id}-${out.length + 1}`, type: "flag", employee: effective, system: r.system, permission: r.permission,
+      evidence: `Access export row ${r._line}; ${role} baseline rules ${ruleRange(baseline, role)}${prevRule ? `; matches previous-role rule ${prevRule.rule_id}` : "; in no baseline"}`,
+      rule: `Not in ${role} baseline`, origin: prevRule ? "previous role" : "no baseline",
+      explanation: explainFlag(effective, r, baseline) + (answer ? ` (Role confirmed by reviewer as ${role}.)` : ""),
+      recommendation: "reviewer decides" });
+  }
+  return out;
+}
+
+function resolve(result, employeeId, answer) {
+  const rows = result._groups.get(employeeId);
+  const emp = result.employees.find(e => e.employee_id === employeeId);
+  return evaluate(emp, rows, result._baseline, answer);
+}
+
+function compact(lines) {
+  const s = [...new Set(lines)].sort((a, b) => a - b); const parts = []; let i = 0;
+  while (i < s.length) { let j = i; while (j + 1 < s.length && s[j + 1] === s[j] + 1) j++; parts.push(i === j ? `${s[i]}` : `${s[i]}-${s[j]}`); i = j + 1; }
+  return parts.join(", ");
+}
+
+const EXPORT_FIELDS = ["item_id", "item_type", "employee_id", "employee_name", "previous_role", "new_role", "system", "permission",
+  "rule", "evidence", "explanation", "decision", "reviewer_note", "reviewer", "decided_at"];
+
+function csvCell(v) { v = v == null ? "" : String(v); return /[",\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; }
+
+function exportRows(items, decisions, reviewer) {
+  return items.map(it => {
+    const d = decisions[it.id] || {};
+    return { item_id: it.id, item_type: it.type, employee_id: it.employee.employee_id, employee_name: it.employee.employee_name,
+      previous_role: it.employee.previous_role, new_role: it.employee.new_role || "(unresolved)",
+      system: it.system || "(n/a: clarification)", permission: it.permission || "(n/a: clarification)",
+      rule: it.rule, evidence: it.evidence, explanation: it.explanation,
+      decision: d.decision || "", reviewer_note: d.note || "", reviewer: reviewer || "", decided_at: d.at || "" };
+  });
+}
+
+function toCSV(rows) {
+  return [EXPORT_FIELDS.join(","), ...rows.map(r => EXPORT_FIELDS.map(f => csvCell(r[f])).join(","))].join("\r\n");
+}
+
+if (typeof module !== "undefined") module.exports = { parseCSV, analyze, resolve, exportRows, toCSV, EXPORT_FIELDS };
+
+const SAMPLE_ACCESS = "employee_id,employee_name,previous_role,new_role,change_date,system,permission\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Jira,\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Jira,Reporter\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Microsoft 365,Standard User\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,HubSpot,Marketing Hub Editor\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Canva,Team Member\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Slack,Member\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Tableau,Creator\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,GitHub,Repository Read\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Google Analytics,Viewer\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Snowflake,Analytics Reader\nE1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,SharePoint,Company Intranet Read\nE1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Slack,Member\nE1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Snowflake,Analytics Reader\nE1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Microsoft 365,Standard User\nE1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,SharePoint,Company Intranet Read\nE1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Jira,Reporter\nE1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Tableau,Creator\nE1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,GitHub,Repository Read\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Microsoft 365,Standard User\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Gong,Call Recording User\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,SharePoint,Marketing Site Edit\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Google Analytics,Viewer\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Slack,Member\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Canva,Team Member\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,HubSpot,Marketing Hub Editor\nE1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,SharePoint,Company Intranet Read\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Slack,Member\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Salesforce,Account Read\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,AWS,Dev Account PowerUser\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,GitHub,Repository Write\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,SharePoint,Company Intranet Read\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Tableau,Sales Dashboards Editor\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Jira,Developer\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Microsoft 365,Standard User\nE1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Datadog,Read Only\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Tableau,Finance Dashboards Viewer\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,SharePoint,Finance Site Edit\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Workday,Expense Report Review\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,SharePoint,Company Intranet Read\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,NetSuite,GL Read\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Microsoft 365,Standard User\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,NetSuite,Journal Entry Create\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Slack,Member\nE1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Salesforce,Opportunity Edit\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Workday,Employee Record Edit\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Salesforce,Account Read\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Microsoft 365,Standard User\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Slack,Member\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,SharePoint,Company Intranet Read\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,HubSpot,Contacts Edit\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Gong,Call Recording User\nE1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Salesforce,Opportunity Edit\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Slack,Member\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,SharePoint,HR Site Edit\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,SharePoint,Company Intranet Read\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Microsoft 365,Standard User\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Greenhouse,Recruiter\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Workday,Employee Record Edit\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Workday,Compensation Read\nE1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,GitHub,Repository Write\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Snowflake,Analytics Reader\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,AWS,Prod Account Operator\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,GitHub,Repository Read\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,GitHub,Repository Write\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Jira,Developer\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Slack,Member\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Microsoft 365,Standard User\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Jira,Reporter\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,SharePoint,Company Intranet Read\nE1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Tableau,Creator\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Slack,Member\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Tableau,Sales Dashboards Editor\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,HubSpot,Contacts Read\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Salesforce,Report Builder\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Gong,Call Recording User\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,SharePoint,Company Intranet Read\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Salesforce,Account Read\nE1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Microsoft 365,Standard User\nE1142,Diego Morales,Sales Representative,,2026-10-16,Microsoft 365,Standard User\nE1142,Diego Morales,Sales Representative,,2026-10-16,Salesforce,Opportunity Edit\nE1142,Diego Morales,Sales Representative,,2026-10-16,SharePoint,Company Intranet Read\nE1142,Diego Morales,Sales Representative,,2026-10-16,Slack,Member\nE1142,Diego Morales,Sales Representative,,2026-10-16,HubSpot,Contacts Edit\nE1142,Diego Morales,Sales Representative,,2026-10-16,Zendesk,Agent\nE1142,Diego Morales,Sales Representative,,2026-10-16,Salesforce,Account Read\nE1142,Diego Morales,Sales Representative,,2026-10-16,Jira,Reporter\nE1145,Hana Cho,Marketing Specialist,Software Engineer,2026-09-06,Canva,Team Member\nE1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,Bill.com,Payment Prepare\nE1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,Microsoft 365,Standard User\nE1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,NetSuite,Vendor Bill Create\nE1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,Slack,Member\nE1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,NetSuite,GL Read\nE1145,Hana Cho,Marketing Specialist,Software Engineer,2026-09-06,SharePoint,Marketing Site Edit\nE1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,SharePoint,Finance Site Edit\nE1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,SharePoint,Company Intranet Read\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,GitHub,Repository Write\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Jira,Developer\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,HubSpot,Contacts Read\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Salesforce,Account Read\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Slack,Member\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Microsoft 365,Standard User\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Salesforce,Export All Data\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Salesforce,Report Builder\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,AWS,Dev Account PowerUser\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Datadog,Read Only\nE1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,SharePoint,Company Intranet Read\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,SharePoint,Company Intranet Read\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Workday,Expense Report Review\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Tableau,Finance Dashboards Viewer\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,NetSuite,Journal Entry Create\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Slack,Member\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,NetSuite,GL Read\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,SharePoint,Finance Site Edit\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Snowflake,ACCOUNTADMIN\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,AWS,Dev Account PowerUser\nE1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Microsoft 365,Standard User\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Workday,Compensation Read\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Microsoft 365,Standard User\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,SharePoint,Company Intranet Read\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,SharePoint,HR Site Edit\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Greenhouse,Recruiter\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Workday,Employee Record Edit\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Datadog,Admin\nE1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Slack,Member\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Jira,Developer\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,AWS,Dev Account PowerUser\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,GitHub,Repository Write\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,SharePoint,Company Intranet Read\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Canva,Team Member\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Datadog,Read Only\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Slack,Member\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Google Analytics,Viewer\nE1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Microsoft 365,Standard User\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Microsoft 365,Standard User\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Canva,Team Member\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,SharePoint,Company Intranet Read\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,GitHub,Repository Write\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,PagerDuty,Responder\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Datadog,Admin\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,SharePoint,Marketing Site Edit\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,AWS,Prod Account Operator\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Jira,Developer\nE1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Slack,Member\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,SharePoint,Marketing Site Edit\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Google Analytics,Viewer\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,SharePoint,Finance Site Edit\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,SharePoint,Company Intranet Read\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Canva,Team Member\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Slack,Member\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,HubSpot,Marketing Hub Editor\nE1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Microsoft 365,Standard User\nE1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Microsoft 365,Standard User\nE1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Slack,Member\nE1188,Kenji Mori,Accounts Payable Specialist,Finance Analyst,2026-09-10,NetSuite,GL Read\nE1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Gong,Call Recording User\nE1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,SharePoint,Company Intranet Read\nE1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Salesforce,Opportunity Edit\nE1188,Kenji Mori,Accounts Payable Specialist,Finance Analyst,2026-09-10,NetSuite,Vendor Bill Create\nE1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,HubSpot,Contacts Edit\nE1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Salesforce,Account Read\nE1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,HubSpot,Marketing Hub Editor\nE1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Microsoft 365,Standard User\nE1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Slack,Member\nE1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Google Analytics,Viewer\nE1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,SharePoint,Company Intranet Read\nE1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,SharePoint,Marketing Site Edit\nE1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Canva,Team Member\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,GitHub,Repository Write\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Microsoft 365,Standard User\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,AWS,Dev Account PowerUser\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,SharePoint,Company Intranet Read\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Jira,Developer\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Datadog,Admin\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Datadog,Read Only\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,PagerDuty,Responder\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Slack,Member\nE1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,AWS,Prod Account Operator\nE1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Jira,Project Admin\nE1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,SharePoint,Company Intranet Read\nE1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Salesforce,Account Read\nE1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Microsoft 365,Standard User\nE1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,AWS,Prod Account Operator\nE1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Slack,Member\nE1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,PagerDuty,Responder\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Tableau,Sales Dashboards Editor\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Salesforce,Report Builder\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Slack,Member\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Tableau,Finance Dashboards Viewer\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,SharePoint,Finance Site Edit\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Salesforce,Account Read\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,HubSpot,Contacts Read\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Microsoft 365,Standard User\nE1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,SharePoint,Company Intranet Read\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Workday,Expense Report Review\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,NetSuite,Journal Entry Create\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Microsoft 365,Standard User\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Slack,Member\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,SharePoint,Company Intranet Read\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,NetSuite,GL Read\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Tableau,Finance Dashboards Viewer\nE1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,SharePoint,Finance Site Edit\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,SharePoint,Finance Site Edit\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Microsoft 365,Standard User\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Bill.com,Payment Prepare\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,NetSuite,Vendor Bill Create\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,HubSpot,Contacts Read\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,NetSuite,GL Read\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Tableau,Sales Dashboards Editor\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,SharePoint,Company Intranet Read\nE1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Slack,Member\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Jira,Reporter\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,SharePoint,Company Intranet Read\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,HubSpot,Marketing Hub Editor\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,SharePoint,Marketing Site Edit\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Canva,Team Member\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Slack,Member\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Google Analytics,Viewer\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Salesforce,Account Read\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Zendesk,Agent\nE1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Microsoft 365,Standard User\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Microsoft 365,Standard User\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Workday,Compensation Read\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,SharePoint,HR Site Edit\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Workday,Employee Record Edit\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Greenhouse,Recruiter\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Slack,Member\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,GitHub,Repository Read\nE1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,SharePoint,Company Intranet Read\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,SharePoint,HR Site Edit\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Workday,Employee Record Edit\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,SharePoint,Company Intranet Read\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Greenhouse,Recruiter\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Workday,Compensation Read\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Slack,Member\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Microsoft 365,Standard User\nE1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Tableau,Creator\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Slack,Member\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,SharePoint,Company Intranet Read\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,SharePoint,Marketing Site Edit\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Microsoft 365,Standard User\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Canva,Team Member\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,AWS,Dev Account PowerUser\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Google Analytics,Viewer\nE1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,HubSpot,Marketing Hub Editor\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,SharePoint,Company Intranet Read\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Google Analytics,Viewer\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Microsoft 365,Standard User\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,SharePoint,Marketing Site Edit\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Canva,Team Member\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Tableau,Sales Dashboards Editor\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,HubSpot,Marketing Hub Editor\nE1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Slack,Member\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Microsoft 365,Standard User\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,NetSuite,Journal Entry Create\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Slack,Member\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,NetSuite,GL Read\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Workday,Expense Report Review\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Tableau,Finance Dashboards Viewer\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,SharePoint,Company Intranet Read\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,SharePoint,Finance Site Edit\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Zendesk,Agent\nE1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Salesforce,Account Read\n";
+const SAMPLE_BASE = "role,system,permission,rule_id\nFinance Analyst,Microsoft 365,Standard User,FA-01\nFinance Analyst,Slack,Member,FA-02\nFinance Analyst,SharePoint,Company Intranet Read,FA-03\nFinance Analyst,NetSuite,GL Read,FA-04\nFinance Analyst,NetSuite,Journal Entry Create,FA-05\nFinance Analyst,Workday,Expense Report Review,FA-06\nFinance Analyst,Tableau,Finance Dashboards Viewer,FA-07\nFinance Analyst,SharePoint,Finance Site Edit,FA-08\nAccounts Payable Specialist,Microsoft 365,Standard User,AP-01\nAccounts Payable Specialist,Slack,Member,AP-02\nAccounts Payable Specialist,SharePoint,Company Intranet Read,AP-03\nAccounts Payable Specialist,NetSuite,Vendor Bill Create,AP-04\nAccounts Payable Specialist,NetSuite,GL Read,AP-05\nAccounts Payable Specialist,Bill.com,Payment Prepare,AP-06\nAccounts Payable Specialist,SharePoint,Finance Site Edit,AP-07\nSales Representative,Microsoft 365,Standard User,SR-01\nSales Representative,Slack,Member,SR-02\nSales Representative,SharePoint,Company Intranet Read,SR-03\nSales Representative,Salesforce,Opportunity Edit,SR-04\nSales Representative,Salesforce,Account Read,SR-05\nSales Representative,HubSpot,Contacts Edit,SR-06\nSales Representative,Gong,Call Recording User,SR-07\nSales Operations Analyst,Microsoft 365,Standard User,SO-01\nSales Operations Analyst,Slack,Member,SO-02\nSales Operations Analyst,SharePoint,Company Intranet Read,SO-03\nSales Operations Analyst,Salesforce,Report Builder,SO-04\nSales Operations Analyst,Salesforce,Account Read,SO-05\nSales Operations Analyst,Tableau,Sales Dashboards Editor,SO-06\nSales Operations Analyst,HubSpot,Contacts Read,SO-07\nHR Generalist,Microsoft 365,Standard User,HR-01\nHR Generalist,Slack,Member,HR-02\nHR Generalist,SharePoint,Company Intranet Read,HR-03\nHR Generalist,Workday,Employee Record Edit,HR-04\nHR Generalist,Workday,Compensation Read,HR-05\nHR Generalist,Greenhouse,Recruiter,HR-06\nHR Generalist,SharePoint,HR Site Edit,HR-07\nSoftware Engineer,Microsoft 365,Standard User,SE-01\nSoftware Engineer,Slack,Member,SE-02\nSoftware Engineer,SharePoint,Company Intranet Read,SE-03\nSoftware Engineer,GitHub,Repository Write,SE-04\nSoftware Engineer,AWS,Dev Account PowerUser,SE-05\nSoftware Engineer,Jira,Developer,SE-06\nSoftware Engineer,Datadog,Read Only,SE-07\nSite Reliability Engineer,Microsoft 365,Standard User,RE-01\nSite Reliability Engineer,Slack,Member,RE-02\nSite Reliability Engineer,SharePoint,Company Intranet Read,RE-03\nSite Reliability Engineer,AWS,Prod Account Operator,RE-04\nSite Reliability Engineer,GitHub,Repository Write,RE-05\nSite Reliability Engineer,PagerDuty,Responder,RE-06\nSite Reliability Engineer,Datadog,Admin,RE-07\nSite Reliability Engineer,Jira,Developer,RE-08\nData Analyst,Microsoft 365,Standard User,DA-01\nData Analyst,Slack,Member,DA-02\nData Analyst,SharePoint,Company Intranet Read,DA-03\nData Analyst,Snowflake,Analytics Reader,DA-04\nData Analyst,Tableau,Creator,DA-05\nData Analyst,Jira,Reporter,DA-06\nData Analyst,GitHub,Repository Read,DA-07\nCustomer Support Agent,Microsoft 365,Standard User,CS-01\nCustomer Support Agent,Slack,Member,CS-02\nCustomer Support Agent,SharePoint,Company Intranet Read,CS-03\nCustomer Support Agent,Zendesk,Agent,CS-04\nCustomer Support Agent,Salesforce,Account Read,CS-05\nCustomer Support Agent,Jira,Reporter,CS-06\nMarketing Specialist,Microsoft 365,Standard User,MK-01\nMarketing Specialist,Slack,Member,MK-02\nMarketing Specialist,SharePoint,Company Intranet Read,MK-03\nMarketing Specialist,HubSpot,Marketing Hub Editor,MK-04\nMarketing Specialist,Canva,Team Member,MK-05\nMarketing Specialist,SharePoint,Marketing Site Edit,MK-06\nMarketing Specialist,Google Analytics,Viewer,MK-07\n";
+const $ = id => document.getElementById(id);
+let texts = { A: null, B: null }, result = null, items = [], decisions = {}, notes = {}, selected = null, filter = "all";
+
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function download(name, text) {
+  try { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" })); a.download = name; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
+  // Fallback for viewers that block downloads: show the file with a Copy button
+  $("fileName").textContent = name; $("fileText").value = text; $("filePanel").classList.remove("hidden");
+}
+function readFile(input, slot, label) {
+  input.onchange = () => { const f = input.files[0]; if (!f) return; const r = new FileReader();
+    r.onload = () => { texts[slot] = r.result; $(label).textContent = `Loaded ${f.name}`; $("run").disabled = !(texts.A && texts.B); }; r.readAsText(f); };
+}
+readFile($("fA"), "A", "nA"); readFile($("fB"), "B", "nB");
+$("dlA").onclick = () => download("access_export.csv", SAMPLE_ACCESS);
+$("dlB").onclick = () => download("role_baseline.csv", SAMPLE_BASE);
+$("sample").onclick = () => { texts = { A: SAMPLE_ACCESS, B: SAMPLE_BASE }; $("nA").textContent = "Loaded synthetic access_export.csv"; $("nB").textContent = "Loaded synthetic role_baseline.csv"; $("run").disabled = false; start(); };
+$("run").onclick = start;
+
+function start() {
+  result = analyze(texts.A, texts.B); items = result.items.slice(); decisions = {}; notes = {};
+  const i = result.intake, mv = i.missingValues;
+  const byField = {}; mv.forEach(m => { byField[m.field] = (byField[m.field] || 0) + 1; });
+  const flags = items.filter(x => x.type === "flag").length, qs = items.filter(x => x.type === "clarification").length;
+  let h = `<div class="stats">
+    <div class="stat"><div class="n">${i.accessRows}</div><div class="l">access rows imported</div></div>
+    <div class="stat"><div class="n">${i.baselineRows}</div><div class="l">baseline rules (${i.roles} roles)</div></div>
+    <div class="stat"><div class="n">${i.employees}</div><div class="l">employees with a role change</div></div>
+    <div class="stat ${mv.length ? "warn" : ""}"><div class="n">${mv.length}</div><div class="l">rows with missing fields</div></div>
+    <div class="stat flag"><div class="n">${flags}</div><div class="l">permissions outside new role</div></div>
+    <div class="stat warn"><div class="n">${qs}</div><div class="l">employees needing an answer</div></div></div>`;
+  if (i.missingColumns.length) h += `<p style="color:var(--red);font-weight:700">Missing required columns: ${esc(i.missingColumns.join(", "))}. Fix the export and upload again.</p>`;
+  if (mv.length) h += `<details><summary>Missing-field report: ${Object.entries(byField).map(([f, n]) => `${n} blank ${f}`).join(", ")}</summary>
+    <table style="margin-top:8px"><tr><th>File</th><th>Row</th><th>Field</th><th>Employee</th></tr>${mv.map(m => `<tr><td>${esc(m.file)}</td><td>${m.line}</td><td>${esc(m.field)}</td><td>${esc(m.employee_id)}</td></tr>`).join("")}</table></details>`;
+  else h += `<p class="ok">All required fields present.</p>`;
+  $("intake").innerHTML = h; $("intake").classList.remove("hidden");
+  if (!i.ok) return;
+  $("reviewSec").classList.remove("hidden"); $("st2").classList.add("on");
+  selected = (result.employees.find(e => items.some(x => x.employee.employee_id === e.employee_id && x.type === "flag")) || result.employees[0]).employee_id;
+  render();
+}
+
+function empItems(id) { return items.filter(x => x.employee.employee_id === id); }
+function status(id) {
+  const its = empItems(id);
+  if (!its.length) return { cls: "p-ok", txt: "No flags", key: "clean" };
+  if (its.some(x => x.type === "clarification" && !decisions[x.id])) return { cls: "p-q", txt: "Needs answer", key: "q" };
+  const open = its.filter(x => !decisions[x.id]).length;
+  if (!open) return { cls: "p-done", txt: "Decided", key: "done" };
+  return { cls: "p-flag", txt: `${its.filter(x => x.type === "flag").length} flagged`, key: "flag" };
+}
+function render() {
+  const emps = result.employees.filter(e => {
+    const s = status(e.employee_id), its = empItems(e.employee_id);
+    if (filter === "all") return true;
+    if (filter === "flag") return its.some(x => x.type === "flag");
+    if (filter === "q") return its.some(x => x.type === "clarification");
+    if (filter === "open") return its.some(x => !decisions[x.id]);
+    if (filter === "clean") return !its.length;
+  });
+  $("emps").innerHTML = emps.map(e => { const s = status(e.employee_id);
+    return `<div class="emp ${e.employee_id === selected ? "sel" : ""}" data-id="${e.employee_id}"><div><div class="nm">${esc(e.employee_name)}</div><div class="rl">${esc(e.employee_id)} &middot; ${esc(e.roles_seen.length > 1 ? "role unclear" : (e.new_role || "role unknown"))}</div></div><span class="pill ${s.cls}">${s.txt}</span></div>`; }).join("") || `<p class="muted">No employees match this filter.</p>`;
+  document.querySelectorAll(".emp").forEach(el => el.onclick = () => { selected = el.dataset.id; render(); });
+  renderDetail(); renderProgress();
+}
+function renderDetail() {
+  const e = result.employees.find(x => x.employee_id === selected); const its = empItems(selected);
+  const cur = its[0] ? its[0].employee : e;
+  let h = `<div class="emphead"><h2>${esc(e.employee_name)} <span style="font-size:14px;color:#C9D1E0">${esc(e.employee_id)}</span></h2>
+    <div class="r">${esc(e.previous_role || "?")} <span class="arrow">&rarr;</span> ${esc(cur.new_role || (e.roles_seen.length > 1 ? e.roles_seen.join(" / ") : "new role missing"))} &middot; changed ${esc(e.change_date || "?")} &middot; ${e.rowCount} permission rows</div></div>`;
+  if (!its.length) h += `<div class="item" style="border-left-color:var(--green)"><div class="perm">Every permission matches the ${esc(cur.new_role)} baseline</div><div class="meta">Nothing to review for this employee.</div></div>`;
+  for (const it of its) {
+    const d = decisions[it.id];
+    if (it.type === "clarification") {
+      const canAnswer = it.reason === "missing_new_role" || it.reason === "conflicting_new_role" || it.reason === "no_baseline_for_role";
+      h += `<div class="item q"><div class="head"><span class="perm">Question for the reviewer</span><span class="pill p-q">No recommendation made</span></div>
+        <div class="meta">${esc(it.evidence)} &middot; ${esc(it.rule)}</div>
+        <div class="expl"><span class="lbl">Why the agent stopped</span>${esc(it.explanation)}</div>
+        <div class="decide">${canAnswer ? `<select id="ans-${it.id}"><option value="">Choose the correct role...</option>${it.options.map(o => `<option>${esc(o)}</option>`).join("")}</select><button class="primary" data-ans="${it.id}">Answer and re-check</button>`
+          : `<button class="primary" data-ign="${it.id}">Confirm blank row can be ignored, re-check</button>`}
+          <button class="${d ? "sel-investigate" : ""}" data-dec="${it.id}" data-v="investigate">Hold as investigate</button>
+          <span class="when">${d ? `Decided ${new Date(d.at).toLocaleString()}` : ""}</span></div></div>`;
+    } else {
+      h += `<div class="item"><div class="head"><span class="perm">${esc(it.system)}: ${esc(it.permission)}</span><span class="pill p-flag">${it.origin === "previous role" ? "Left over from previous role" : "In no baseline"}</span></div>
+        <div class="meta">Evidence: ${esc(it.evidence)}</div>
+        <div class="expl"><span class="lbl">Explanation (template stand-in for AI step)</span>${esc(it.explanation)}</div>
+        <div class="decide">${["keep", "investigate", "revoke-recommended"].map(v => `<button class="${d && d.decision === v ? "sel-" + v : ""}" data-dec="${it.id}" data-v="${v}">${v === "revoke-recommended" ? "Revoke-recommended" : v[0].toUpperCase() + v.slice(1)}</button>`).join("")}
+          <input placeholder="Note (optional)" data-note="${it.id}" value="${esc(notes[it.id] || "")}" style="flex:1;min-width:140px">
+          <span class="when">${d ? `Decided ${new Date(d.at).toLocaleString()}` : ""}</span></div></div>`;
+    }
+  }
+  h += `<p class="noaccess">AccessGuard AI records decisions only. Any access change goes through your normal approval process.</p>`;
+  $("detail").innerHTML = h;
+  document.querySelectorAll("[data-dec]").forEach(b => b.onclick = () => { const id = b.dataset.dec; const prev = decisions[id] || {};
+    decisions[id] = { decision: b.dataset.v, note: notes[id] || prev.note || "", at: new Date().toISOString() }; render(); });
+  document.querySelectorAll("[data-note]").forEach(inp => inp.onchange = () => { notes[inp.dataset.note] = inp.value; if (decisions[inp.dataset.note]) decisions[inp.dataset.note].note = inp.value; });
+  document.querySelectorAll("[data-ans]").forEach(b => b.onclick = () => { const v = $("ans-" + b.dataset.ans).value; if (!v) return; replace(b.dataset.ans, { new_role: v }); });
+  document.querySelectorAll("[data-ign]").forEach(b => b.onclick = () => replace(b.dataset.ign, { ignoreBlankRows: true }));
+}
+function replace(itemId, answer) {
+  const it = items.find(x => x.id === itemId); const eid = it.employee.employee_id;
+  const fresh = resolve(result, eid, answer);
+  const idx = items.findIndex(x => x.employee.employee_id === eid);
+  items = items.filter(x => x.employee.employee_id !== eid); items.splice(idx, 0, ...fresh);
+  delete decisions[itemId]; render();
+}
+function renderProgress() {
+  const total = items.length, done = items.filter(x => decisions[x.id]).length;
+  $("bar").style.width = total ? `${100 * done / total}%` : "100%";
+  $("ptext").textContent = `${done} of ${total} items decided`;
+  const ok = done === total && $("reviewer").value.trim();
+  $("export").disabled = !ok;
+  $("exportNote").textContent = done < total ? "Export unlocks when every flag and question has a decision, so the audit record is never partial." : (!$("reviewer").value.trim() ? "Enter the reviewer name to export." : "Ready to export.");
+  if (done === total && total) $("st3").classList.add("on");
+}
+$("reviewer").oninput = renderProgress;
+$("copyFile").onclick = () => { navigator.clipboard.writeText($("fileText").value).then(() => $("copyFile").textContent = "Copied", () => { $("fileText").select(); }); };
+$("closeFile").onclick = () => $("filePanel").classList.add("hidden");
+$("filters").onclick = ev => { const f = ev.target.dataset.f; if (!f) return; filter = f; document.querySelectorAll("#filters button").forEach(b => b.classList.toggle("on", b.dataset.f === f)); render(); };
+$("export").onclick = () => {
+  const csv = toCSV(exportRows(items, decisions, $("reviewer").value.trim()));
+  download(`accessguard_audit_${new Date().toISOString().slice(0, 10)}.csv`, csv);
+  $("exportNote").innerHTML = `<span class="ok">Exported ${items.length} decisions with evidence, reviewer and timestamp. No access was changed.</span>`;
+};
+</script>
+</body>
+</html>

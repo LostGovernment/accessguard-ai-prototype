@@ -1,0 +1,263 @@
+employee_id,employee_name,previous_role,new_role,change_date,system,permission
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Jira,
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Jira,Reporter
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Microsoft 365,Standard User
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,HubSpot,Marketing Hub Editor
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Canva,Team Member
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Slack,Member
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Tableau,Creator
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,GitHub,Repository Read
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Google Analytics,Viewer
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,Snowflake,Analytics Reader
+E1048,Avery Holt,Marketing Specialist,Data Analyst,2026-09-03,SharePoint,Company Intranet Read
+E1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Slack,Member
+E1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Snowflake,Analytics Reader
+E1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Microsoft 365,Standard User
+E1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,SharePoint,Company Intranet Read
+E1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Jira,Reporter
+E1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,Tableau,Creator
+E1061,Jordan Reyes,HR Generalist,Data Analyst,2026-09-07,GitHub,Repository Read
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Microsoft 365,Standard User
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Gong,Call Recording User
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,SharePoint,Marketing Site Edit
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Google Analytics,Viewer
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Slack,Member
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,Canva,Team Member
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,HubSpot,Marketing Hub Editor
+E1077,Priya Nair,Sales Representative,Marketing Specialist,2026-09-25,SharePoint,Company Intranet Read
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Slack,Member
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Salesforce,Account Read
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,AWS,Dev Account PowerUser
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,GitHub,Repository Write
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,SharePoint,Company Intranet Read
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Tableau,Sales Dashboards Editor
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Jira,Developer
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Microsoft 365,Standard User
+E1082,Marcus Okafor,Sales Operations Analyst,,2026-10-24,Datadog,Read Only
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Tableau,Finance Dashboards Viewer
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,SharePoint,Finance Site Edit
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Workday,Expense Report Review
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,SharePoint,Company Intranet Read
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,NetSuite,GL Read
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Microsoft 365,Standard User
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,NetSuite,Journal Entry Create
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Slack,Member
+E1095,Lena Lindqvist,Sales Representative,Finance Analyst,2026-10-01,Salesforce,Opportunity Edit
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Workday,Employee Record Edit
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Salesforce,Account Read
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Microsoft 365,Standard User
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Slack,Member
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,SharePoint,Company Intranet Read
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,HubSpot,Contacts Edit
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Gong,Call Recording User
+E1099,Tomas Brandt,HR Generalist,Sales Representative,2026-09-25,Salesforce,Opportunity Edit
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Slack,Member
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,SharePoint,HR Site Edit
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,SharePoint,Company Intranet Read
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Microsoft 365,Standard User
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Greenhouse,Recruiter
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Workday,Employee Record Edit
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,Workday,Compensation Read
+E1105,Keiko Sato,Software Engineer,HR Generalist,2026-09-20,GitHub,Repository Write
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Snowflake,Analytics Reader
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,AWS,Prod Account Operator
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,GitHub,Repository Read
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,GitHub,Repository Write
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Jira,Developer
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Slack,Member
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Microsoft 365,Standard User
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Jira,Reporter
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,SharePoint,Company Intranet Read
+E1122,Omar Haddad,Site Reliability Engineer,Data Analyst,2026-10-02,Tableau,Creator
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Slack,Member
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Tableau,Sales Dashboards Editor
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,HubSpot,Contacts Read
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Salesforce,Report Builder
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Gong,Call Recording User
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,SharePoint,Company Intranet Read
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Salesforce,Account Read
+E1139,Grace Whitfield,Sales Representative,Sales Operations Analyst,2026-10-02,Microsoft 365,Standard User
+E1142,Diego Morales,Sales Representative,,2026-10-16,Microsoft 365,Standard User
+E1142,Diego Morales,Sales Representative,,2026-10-16,Salesforce,Opportunity Edit
+E1142,Diego Morales,Sales Representative,,2026-10-16,SharePoint,Company Intranet Read
+E1142,Diego Morales,Sales Representative,,2026-10-16,Slack,Member
+E1142,Diego Morales,Sales Representative,,2026-10-16,HubSpot,Contacts Edit
+E1142,Diego Morales,Sales Representative,,2026-10-16,Zendesk,Agent
+E1142,Diego Morales,Sales Representative,,2026-10-16,Salesforce,Account Read
+E1142,Diego Morales,Sales Representative,,2026-10-16,Jira,Reporter
+E1145,Hana Cho,Marketing Specialist,Software Engineer,2026-09-06,Canva,Team Member
+E1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,Bill.com,Payment Prepare
+E1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,Microsoft 365,Standard User
+E1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,NetSuite,Vendor Bill Create
+E1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,Slack,Member
+E1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,NetSuite,GL Read
+E1145,Hana Cho,Marketing Specialist,Software Engineer,2026-09-06,SharePoint,Marketing Site Edit
+E1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,SharePoint,Finance Site Edit
+E1145,Hana Cho,Marketing Specialist,Accounts Payable Specialist,2026-09-06,SharePoint,Company Intranet Read
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,GitHub,Repository Write
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Jira,Developer
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,HubSpot,Contacts Read
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Salesforce,Account Read
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Slack,Member
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Microsoft 365,Standard User
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Salesforce,Export All Data
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Salesforce,Report Builder
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,AWS,Dev Account PowerUser
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,Datadog,Read Only
+E1155,Samuel Adeyemi,Sales Operations Analyst,Software Engineer,2026-10-22,SharePoint,Company Intranet Read
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,SharePoint,Company Intranet Read
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Workday,Expense Report Review
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Tableau,Finance Dashboards Viewer
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,NetSuite,Journal Entry Create
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Slack,Member
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,NetSuite,GL Read
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,SharePoint,Finance Site Edit
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Snowflake,ACCOUNTADMIN
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,AWS,Dev Account PowerUser
+E1159,Nadia Petrov,Software Engineer,Finance Analyst,2026-10-21,Microsoft 365,Standard User
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Workday,Compensation Read
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Microsoft 365,Standard User
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,SharePoint,Company Intranet Read
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,SharePoint,HR Site Edit
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Greenhouse,Recruiter
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Workday,Employee Record Edit
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Datadog,Admin
+E1167,Victor Alvarez,Site Reliability Engineer,HR Generalist,2026-09-24,Slack,Member
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Jira,Developer
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,AWS,Dev Account PowerUser
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,GitHub,Repository Write
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,SharePoint,Company Intranet Read
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Canva,Team Member
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Datadog,Read Only
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Slack,Member
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Google Analytics,Viewer
+E1171,Imani Mensah,Marketing Specialist,Software Engineer,2026-09-08,Microsoft 365,Standard User
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Microsoft 365,Standard User
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Canva,Team Member
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,SharePoint,Company Intranet Read
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,GitHub,Repository Write
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,PagerDuty,Responder
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Datadog,Admin
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,SharePoint,Marketing Site Edit
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,AWS,Prod Account Operator
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Jira,Developer
+E1175,Felix Koenig,Marketing Specialist,Site Reliability Engineer,2026-10-20,Slack,Member
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,SharePoint,Marketing Site Edit
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Google Analytics,Viewer
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,SharePoint,Finance Site Edit
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,SharePoint,Company Intranet Read
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Canva,Team Member
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Slack,Member
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,HubSpot,Marketing Hub Editor
+E1184,Rosa Duarte,Accounts Payable Specialist,Marketing Specialist,2026-10-13,Microsoft 365,Standard User
+E1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Microsoft 365,Standard User
+E1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Slack,Member
+E1188,Kenji Mori,Accounts Payable Specialist,Finance Analyst,2026-09-10,NetSuite,GL Read
+E1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Gong,Call Recording User
+E1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,SharePoint,Company Intranet Read
+E1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Salesforce,Opportunity Edit
+E1188,Kenji Mori,Accounts Payable Specialist,Finance Analyst,2026-09-10,NetSuite,Vendor Bill Create
+E1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,HubSpot,Contacts Edit
+E1188,Kenji Mori,Accounts Payable Specialist,Sales Representative,2026-09-10,Salesforce,Account Read
+E1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,HubSpot,Marketing Hub Editor
+E1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Microsoft 365,Standard User
+E1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Slack,Member
+E1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Google Analytics,Viewer
+E1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,SharePoint,Company Intranet Read
+E1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,SharePoint,Marketing Site Edit
+E1203,Leah Fischer,Data Analyst,Marketing Specialist,2026-10-08,Canva,Team Member
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,GitHub,Repository Write
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Microsoft 365,Standard User
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,AWS,Dev Account PowerUser
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,SharePoint,Company Intranet Read
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Jira,Developer
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Datadog,Admin
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Datadog,Read Only
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,PagerDuty,Responder
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,Slack,Member
+E1217,Andre Baptiste,Software Engineer,Site Reliability Engineer,2026-10-14,AWS,Prod Account Operator
+E1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Jira,Project Admin
+E1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,SharePoint,Company Intranet Read
+E1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Salesforce,Account Read
+E1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Microsoft 365,Standard User
+E1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,AWS,Prod Account Operator
+E1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,Slack,Member
+E1223,Mei Lin,Site Reliability Engineer,Product Manager,2026-10-22,PagerDuty,Responder
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Tableau,Sales Dashboards Editor
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Salesforce,Report Builder
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Slack,Member
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Tableau,Finance Dashboards Viewer
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,SharePoint,Finance Site Edit
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Salesforce,Account Read
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,HubSpot,Contacts Read
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,Microsoft 365,Standard User
+E1236,Caleb Porter,Finance Analyst,Sales Operations Analyst,2026-09-20,SharePoint,Company Intranet Read
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Workday,Expense Report Review
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,NetSuite,Journal Entry Create
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Microsoft 365,Standard User
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Slack,Member
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,SharePoint,Company Intranet Read
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,NetSuite,GL Read
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,Tableau,Finance Dashboards Viewer
+E1250,Sofia Romano,Data Analyst,Finance Analyst,2026-09-03,SharePoint,Finance Site Edit
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,SharePoint,Finance Site Edit
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Microsoft 365,Standard User
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Bill.com,Payment Prepare
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,NetSuite,Vendor Bill Create
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,HubSpot,Contacts Read
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,NetSuite,GL Read
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Tableau,Sales Dashboards Editor
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,SharePoint,Company Intranet Read
+E1261,Ravi Iyer,Sales Operations Analyst,Accounts Payable Specialist,2026-09-19,Slack,Member
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Jira,Reporter
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,SharePoint,Company Intranet Read
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,HubSpot,Marketing Hub Editor
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,SharePoint,Marketing Site Edit
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Canva,Team Member
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Slack,Member
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Google Analytics,Viewer
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Salesforce,Account Read
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Zendesk,Agent
+E1264,Elena Vasquez,Customer Support Agent,Marketing Specialist,2026-09-16,Microsoft 365,Standard User
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Microsoft 365,Standard User
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Workday,Compensation Read
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,SharePoint,HR Site Edit
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Workday,Employee Record Edit
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Greenhouse,Recruiter
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,Slack,Member
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,GitHub,Repository Read
+E1273,Jonah Kline,Data Analyst,HR Generalist,2026-09-01,SharePoint,Company Intranet Read
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,SharePoint,HR Site Edit
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Workday,Employee Record Edit
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,SharePoint,Company Intranet Read
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Greenhouse,Recruiter
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Workday,Compensation Read
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Slack,Member
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Microsoft 365,Standard User
+E1276,Amara Obi,Data Analyst,HR Generalist,2026-10-10,Tableau,Creator
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Slack,Member
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,SharePoint,Company Intranet Read
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,SharePoint,Marketing Site Edit
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Microsoft 365,Standard User
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Canva,Team Member
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,AWS,Dev Account PowerUser
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,Google Analytics,Viewer
+E1291,Theo Marsh,Software Engineer,Marketing Specialist,2026-09-09,HubSpot,Marketing Hub Editor
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,SharePoint,Company Intranet Read
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Google Analytics,Viewer
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Microsoft 365,Standard User
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,SharePoint,Marketing Site Edit
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Canva,Team Member
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Tableau,Sales Dashboards Editor
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,HubSpot,Marketing Hub Editor
+E1308,Yuki Tanaka,Sales Operations Analyst,Marketing Specialist,2026-09-21,Slack,Member
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Microsoft 365,Standard User
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,NetSuite,Journal Entry Create
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Slack,Member
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,NetSuite,GL Read
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Workday,Expense Report Review
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Tableau,Finance Dashboards Viewer
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,SharePoint,Company Intranet Read
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,SharePoint,Finance Site Edit
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Zendesk,Agent
+E1313,Isaac Grant,Customer Support Agent,Finance Analyst,2026-09-11,Salesforce,Account Read
